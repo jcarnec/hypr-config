@@ -1,0 +1,16 @@
+# Hyprland runtime files
+*.log
+*.pid
+
+# Backup files
+*.bak
+*~
+.swp
+.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Sensitive data (if any)
+# Add any files with tokens, passwords, etc.
