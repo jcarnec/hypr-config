@@ -12,7 +12,18 @@ This repository contains custom configurations that override the default Omarchy
 - `input.conf` - Input device settings
 - `looknfeel.conf` - Visual appearance settings
 - `autostart.conf` - Autostart applications
+- `hyprspace.conf` - Hyprspace plugin configuration (workspace overview)
 - Other config files for hypridle, hyprlock, etc.
+
+## Plugins
+
+### Hyprspace
+Workspace overview plugin (like macOS Mission Control). Toggle with `Super + Tab`.
+
+The plugin is loaded directly via `plugin =` in `hyprland.conf` to avoid timing issues with `hyprpm reload`. After Hyprland updates, rebuild with:
+```bash
+hyprpm update
+```
 
 ## Installation
 

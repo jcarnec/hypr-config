@@ -13,6 +13,9 @@ This repository customizes Hyprland (a dynamic tiling Wayland compositor) while 
 - `SUPER + SHIFT + h/j/k/l` - Move window left/down/up/right
 - `SUPER + v` - Toggle window split (rebinded from SUPER+j to avoid conflicts)
 
+### Workspace Overview (Hyprspace)
+- `SUPER + TAB` - Toggle Hyprspace workspace overview (like macOS Mission Control)
+
 ### Application Launchers
 Quick launch keybindings for common applications:
 - `SUPER + RETURN` - Terminal
@@ -44,6 +47,7 @@ Quick launch keybindings for common applications:
 | `hypridle.conf` | Idle behavior and locking settings |
 | `hyprlock.conf` | Lock screen configuration |
 | `hyprsunset.conf` | Nightlight settings |
+| `hyprspace.conf` | Hyprspace plugin settings (overview) |
 | `xdph.conf` | XWayland settings |
 | `shaders/` | GLSL shader files for visual effects |
 
@@ -138,6 +142,23 @@ Press `SUPER + ALT + K` to open the interactive keybindings menu (moved from SUP
 - `SUPER + SHIFT + SPACE` - Toggle top bar
 - `SUPER + CTRL + SPACE` - Next background in theme
 
+## Plugins
+
+### Hyprspace
+Workspace overview plugin providing a bird's-eye view of all workspaces (similar to macOS Mission Control).
+
+**Loading mechanism**: The plugin is loaded directly via `plugin =` directive in `hyprland.conf` rather than using `exec-once = hyprpm reload`. This is required because:
+- `hyprpm reload` runs asynchronously as a subprocess
+- Hyprland continues parsing config while plugins load
+- Bindings referencing plugin dispatchers fail if parsed before the plugin loads
+- Using `plugin = /path/to.so` ensures synchronous loading before bindings are parsed
+
+**Plugin location**: `/var/cache/hyprpm/josephcarnec/Hyprspace/Hyprspace.so`
+
+**After Hyprland updates**: Run `hyprpm update` to rebuild plugins against the new Hyprland version.
+
+**Configuration**: See `hyprspace.conf` for plugin-specific settings (animation speed, blur, workspace layout, etc.)
+
 ## Dependencies
 
 - Hyprland
@@ -145,6 +166,7 @@ Press `SUPER + ALT + K` to open the interactive keybindings menu (moved from SUP
 - uwsm (for app launching)
 - hyprpicker (color picker)
 - nautilus (file manager, configurable)
+- Hyprspace plugin (via hyprpm)
 - Various omarchy-* utilities
 
 ## Git Repository
