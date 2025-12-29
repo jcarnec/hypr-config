@@ -20,7 +20,7 @@ This repository contains custom configurations that override the default Omarchy
 ### Hyprspace
 Workspace overview plugin (like macOS Mission Control). Toggle with `Super + Tab`.
 
-The plugin is loaded directly via `plugin =` in `hyprland.conf` to avoid timing issues with `hyprpm reload`. After Hyprland updates, rebuild with:
+The plugin is loaded dynamically via `autostart.conf` using `hyprctl plugin load`, then the binding is added via `hyprctl keyword`. This avoids Hyprland's plugin timing issues. After Hyprland updates, rebuild with:
 ```bash
 hyprpm update
 ```

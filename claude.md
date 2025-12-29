@@ -147,11 +147,11 @@ Press `SUPER + ALT + K` to open the interactive keybindings menu (moved from SUP
 ### Hyprspace
 Workspace overview plugin providing a bird's-eye view of all workspaces (similar to macOS Mission Control).
 
-**Loading mechanism**: The plugin is loaded directly via `plugin =` directive in `hyprland.conf` rather than using `exec-once = hyprpm reload`. This is required because:
-- `hyprpm reload` runs asynchronously as a subprocess
-- Hyprland continues parsing config while plugins load
+**Loading mechanism**: The plugin is loaded dynamically via `autostart.conf` rather than static config directives. This is required because:
+- Hyprland parses all config files before executing `exec-once` commands
 - Bindings referencing plugin dispatchers fail if parsed before the plugin loads
-- Using `plugin = /path/to.so` ensures synchronous loading before bindings are parsed
+- `plugin =` directive and `hyprpm reload` both have timing issues
+- Solution: Load plugin via `hyprctl plugin load`, then add binding via `hyprctl keyword`
 
 **Plugin location**: `/var/cache/hyprpm/josephcarnec/Hyprspace/Hyprspace.so`
 
